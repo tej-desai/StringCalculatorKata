@@ -34,8 +34,12 @@ public class StringCalculatorTest {
 
     @Test
     public void testNegativeNumberException(){
-//        exception.expect();
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {stringC.add("//:\n1:-6:-2");});
         assertEquals("negative numbers not allowed -6, -2", exception.getMessage());
+    }
+
+    @Test
+    public void testIgnoreGreaterNumber(){
+        assertEquals(2, stringC.add("2,1003"));
     }
 }

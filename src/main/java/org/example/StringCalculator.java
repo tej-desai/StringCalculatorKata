@@ -1,7 +1,6 @@
 package org.example;
 
 public class StringCalculator {
-    //check once - if static is needed
     public int add(String numbers){
         int num = 0;
         String negativeNumbers = "";
@@ -16,7 +15,6 @@ public class StringCalculator {
             if(checkDelimiter.equals("//"))
             {
                 delimiter = String.valueOf(numbers.charAt(2));
-//                System.out.println("DELIMITER: " + checkDelimiter);
                 numbers = numbers.substring(4);
                 System.out.println("NEW NUMBERS: " + numbers);
                 String[] nums = numbers.split(delimiter);
@@ -29,10 +27,11 @@ public class StringCalculator {
                         else {
                             negativeNumbers = negativeNumbers + ", " + ele;
                         }
-//                        throw new IllegalArgumentException("negative numbers not allowed " + negativeNumbers);
                     }
 
-                    num = num + Integer.parseInt(ele);
+                    if(Integer.parseInt(ele)<1001) {
+                        num = num + Integer.parseInt(ele);
+                    }
                 }
                 if (!negativeNumbers.isEmpty())
                 {
@@ -51,13 +50,14 @@ public class StringCalculator {
                             negativeNumbers = negativeNumbers + ", " + ele;
                         }
                     }
-                    num = num + Integer.parseInt(ele);
+                    if(Integer.parseInt(ele)<1001) {
+                        num = num + Integer.parseInt(ele);
+                    }
                     if (!negativeNumbers.isEmpty())
                     {
                         throw new IllegalArgumentException("negative numbers not allowed " + negativeNumbers);
                     }
                 }
-//                System.out.println("SUM: " + num);
             }
         }
         //handles single numbers
@@ -70,6 +70,5 @@ public class StringCalculator {
         String input = "//:\n1:-6:-2";
         StringCalculator obj = new StringCalculator();
         int result = obj.add(input);
-//        System.out.println("String Calculator: " + result);
     }
 }
