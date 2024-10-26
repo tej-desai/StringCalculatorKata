@@ -4,6 +4,7 @@ public class StringCalculator {
     //check once - if static is needed
     public int add(String numbers){
         int num = 0;
+        String negativeNumbers = "";
         String delimiter;
         //handle empty string
         if(numbers.isEmpty()){
@@ -22,9 +23,20 @@ public class StringCalculator {
                 for(String ele : nums ){
                     if(Integer.parseInt(ele)<0)
                     {
-                        throw new IllegalArgumentException("negative numbers not allowed");
+                        if(negativeNumbers.isEmpty()) {
+                            negativeNumbers = negativeNumbers + ele;
+                        }
+                        else {
+                            negativeNumbers = negativeNumbers + ", " + ele;
+                        }
+//                        throw new IllegalArgumentException("negative numbers not allowed " + negativeNumbers);
                     }
+
                     num = num + Integer.parseInt(ele);
+                }
+                if (!negativeNumbers.isEmpty())
+                {
+                    throw new IllegalArgumentException("negative numbers not allowed " + negativeNumbers);
                 }
             }
             else {
@@ -32,9 +44,18 @@ public class StringCalculator {
                 for (String ele : nums) {
                     if(Integer.parseInt(ele)<0)
                     {
-                        throw new IllegalArgumentException("negative numbers not allowed");
+                        if(negativeNumbers.isEmpty()) {
+                            negativeNumbers = negativeNumbers + ele;
+                        }
+                        else {
+                            negativeNumbers = negativeNumbers + ", " + ele;
+                        }
                     }
                     num = num + Integer.parseInt(ele);
+                    if (!negativeNumbers.isEmpty())
+                    {
+                        throw new IllegalArgumentException("negative numbers not allowed " + negativeNumbers);
+                    }
                 }
 //                System.out.println("SUM: " + num);
             }
@@ -46,7 +67,7 @@ public class StringCalculator {
         return num;
     }
     public static  void main(String[] args){
-        String input = "//:\n1:-6";
+        String input = "//:\n1:-6:-2";
         StringCalculator obj = new StringCalculator();
         int result = obj.add(input);
 //        System.out.println("String Calculator: " + result);
